@@ -1,0 +1,25 @@
+<div class="favorite-hotels-wrapper">
+  <h2>Favorite hotels</h2>
+  <div class="favorite-hotel-scroll-section">
+    <div class="favorite-hotel" *ngFor="let hotel of favoriteHotels">
+      <div class="favorite-hotel-info">
+        <span class="favorite-hotel-address">{{ hotel.address }}</span>
+        <span class="favorite-hotel-name">{{ hotel.title }}</span>
+        <span class="favorite-hotel-description">{{ hotel.description }}</span>
+        <span class="favorite-hotel-tel">Tel: {{ hotel.phone }}</span>
+      </div>
+      <div class="activity-img">
+        <ul>
+          <li><img [src]="hotel.photos[0]" alt="" /></li>
+          <li><img [src]="hotel.photos[1]" alt="" /></li>
+        </ul>
+      </div>
+      <div
+        class="delete-favorite-hotel-wrapper"
+        (click)="deleteFavoriteHotel(hotel.id)"
+      >
+        <div class="delete-button"></div>
+      </div>
+    </div>
+  </div>
+</div>

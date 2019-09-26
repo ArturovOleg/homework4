@@ -1,0 +1,47 @@
+<div class="element-bg-img">
+  <img [src]="currentHotel.picture" alt="" class="img-responsive" />
+</div>
+<div class="element-left-bottom">
+  <div class="ele-strip">
+    <ul>
+      <li><a href="index.html#">Hotel</a></li>
+      <li><a href="index.html#">Fishing</a></li>
+      <li><a href="index.html#">Tours</a></li>
+      <li class="anc-bor"><a href="index.html#">Weather</a></li>
+    </ul>
+  </div>
+  <div class="village">
+    <h3>Righteous indignation & like</h3>
+    <span class="line"> </span>
+    <div class="activity_box">
+      <div class="scrollbar" id="style-2">
+        <div
+          class="activity-row"
+          *ngFor="let hotel of hotels"
+          (click)="selectHotel(hotel)"
+          [ngClass]="{ 'active-hotel': currentHotel.id === hotel.id }"
+        >
+          <div class="activity-desc">
+            <h5>{{ hotel.address }}</h5>
+            <p>{{ hotel.title }}</p>
+            <p>{{ hotel.description }}</p>
+            <h6>Tel:{{ hotel.phone }}</h6>
+          </div>
+          <div class="activity-img">
+            <ul>
+              <li><img [src]="hotel.photos[0]" alt="" /></li>
+              <li><img [src]="hotel.photos[1]" alt="" /></li>
+            </ul>
+          </div>
+          <div class="clear"></div>
+          <button
+            class="add-to-favorite"
+            (click)="addToFavoriteHotels(hotel.id); $event.stopPropagation()"
+          >
+            to favorite
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="element">
+  <div class="element-left">
+    <app-hotels-list
+      [hotels]="hotels"
+      [currentHotel]="currentHotel"
+      (changeHotel)="selectHotel($event)"
+      (addToFavorite)="addToFavorite($event)"
+    ></app-hotels-list>
+  </div>
+  <div class="element-right">
+    <app-weather-widget [weather]="currentHotel.weather"></app-weather-widget>
+    <app-profile [profile]="currentHotel.profile"></app-profile>
+  </div>
+  <div class="element-right">
+    <app-favorite-hotels
+      [favoriteHotels]="favoriteHotels"
+      (delFavoriteHotel)="deleteFavoriteHotel($event)"
+      *ngIf="favoriteHotels.length > 0"
+    ></app-favorite-hotels>
+  </div>
+  <div class="clear"></div>
+</div>
+<app-footer></app-footer>
