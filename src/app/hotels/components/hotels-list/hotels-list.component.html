@@ -4,10 +4,51 @@
 <div class="element-left-bottom">
   <div class="ele-strip">
     <ul>
-      <li><a href="index.html#">Hotel</a></li>
-      <li><a href="index.html#">Fishing</a></li>
-      <li><a href="index.html#">Tours</a></li>
-      <li class="anc-bor"><a href="index.html#">Weather</a></li>
+      <li (click)="searchByName()" *ngIf="!byNameIsClicked">
+        <a href="#">By Name</a>
+      </li>
+      <li *ngIf="byNameIsClicked">
+        <input
+          type="text"
+          placeholder="by name"
+          [value]="byName"
+          #inputByNameRef
+          (keyup)="searchingByName(inputByNameRef.value)"
+        />
+        <button (click)="closeSearchByName()">close</button>
+      </li>
+      <li (click)="searchByDesc()" *ngIf="!byDescIsClicked">
+        <a href="#">By Description</a>
+      </li>
+      <li *ngIf="byDescIsClicked">
+        <input
+          type="text"
+          placeholder="by name"
+          [value]="byDescription"
+          #inputByDescRef
+          (keyup)="searchingByDesc(inputByDescRef.value)"
+        />
+        <button (click)="closeSearchByDesc()">close</button>
+      </li>
+      <li (click)="searchByStars()" *ngIf="!byStarsIsClicked">
+        <a href="#">By Stars</a>
+      </li>
+      <li *ngIf="byStarsIsClicked">
+        <div>
+          <mat-form-field>
+            <mat-label>by stars</mat-label>
+            <mat-select [(value)]="byStars">
+              <mat-option
+                *ngFor="let hotel of hotelsStars"
+                [value]="hotel.value"
+              >
+                {{ hotel.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button (click)="closeSearchByStars()">close</button>
+      </li>
     </ul>
   </div>
   <div class="village">
@@ -17,7 +58,9 @@
       <div class="scrollbar" id="style-2">
         <div
           class="activity-row"
-          *ngFor="let hotel of hotels"
+          *ngFor="
+            let hotel of hotels | searchingHotel: byName:byDescription:byStars
+          "
           (click)="selectHotel(hotel)"
           [ngClass]="{ 'active-hotel': currentHotel.id === hotel.id }"
         >
